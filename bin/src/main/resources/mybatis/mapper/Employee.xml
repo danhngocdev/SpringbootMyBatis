@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmc.shop.dao.EmployeeDAO">
+
+	<resultMap id="EmployeeResultMap"
+		type="com.cmc.shop.model.Employee">
+		<id property="user_id" column="user_id" />
+		<result property="user_name" column="user_name" />
+		<result property="user_slary" column="user_slary" />
+		<result property="user_join" column="user_join"/>
+		<result property="user_phone" column="user_phone" />
+		<result property="user_address" column="user_address" />
+	</resultMap>
+
+	<select id="findAll" resultMap="EmployeeResultMap">
+		select * from employee
+	</select>
+	
+	<select id="findAllList" resultMap="EmployeeResultMap">
+		select * from employee
+	</select>
+	<select id="find" resultMap="EmployeeResultMap">
+		select * from employee where
+		user_id= #{user_id}
+	</select>
+	
+	<insert id="save" parameterType="com.cmc.shop.model.Employee">
+		insert into employee
+		values (#{user_id},#{user_name},#{user_slary},#{user_join},#{user_phone},#{user_address})
+	</insert>
+
+	<update id="update" parameterType="String">
+	
+		update employee
+		<set>
+			
+			<if test='user_name != ""'>user_name=#{user_name},</if>
+			
+			<if test='user_slary != ""'>user_slary=#{user_slary},</if>
+			
+			<if test="user_join != null">user_join=#{user_join},</if>
+			
+			<if test='user_phone != ""'>user_phone=#{user_phone},</if>
+			
+			<if test='user_address != ""'>user_address=#{user_address}</if>
+			
+		</set>
+		where user_id= #{user_id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from employee where
+		user_id=#{user_id};
+	</delete>
+
+	<select id="findByNameEmp" resultMap="EmployeeResultMap" parameterType="com.cmc.shop.model.Employee">
+		select * from employee
+		<where>
+			
+			<if test="s != null" >
+				user_name like #{user_name}
+			</if>
+			
+			<if test="s != null">
+				or user_slary like #{user_slary}
+			</if>
+			
+			<if test="s != null">
+				or user_join like #{user_join}
+			</if>
+			
+			<if test="s != null">
+				or user_phone like #{user_phone}
+			</if> 
+			<if test="s != null">
+				or user_address like #{user_address}
+			</if> 
+		</where> 
+		
+	</select>
+	
+	<select id="findByDate" resultMap="EmployeeResultMap" parameterType="com.cmc.shop.model.Employee">  
+	     select * from employee where user_join between #{dateFrom,jdbcType=DATE}  and  #{dateTo,jdbcType=DATE}
+	</select>
+	
+</mapper>
