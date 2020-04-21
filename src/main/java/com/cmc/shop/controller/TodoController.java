@@ -84,5 +84,11 @@ public class TodoController {
 	}
      return check;
 	}
+	
+	@RequestMapping(value = "/todo/{id}",method = RequestMethod.PATCH)
+	public Todo getPostOne(@PathVariable int id) {
+		Todo emp = todoService.find(id);
+		return emp;
+	}
     
 }

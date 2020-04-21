@@ -13,5 +13,7 @@ public interface TodoService {
 	
 	void updatePost(Todo todo);
 	
+	Todo find(int id);
+	
 	public ArrayList<Todo> getByType(String type);
 }

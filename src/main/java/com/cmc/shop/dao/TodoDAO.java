@@ -13,6 +13,9 @@ public interface TodoDAO {
 	    
 		void save(Todo todo);
 		
+		Todo find(int id);
+		
+		
 		void delete(int id);
 		
 		void update(Todo todo);

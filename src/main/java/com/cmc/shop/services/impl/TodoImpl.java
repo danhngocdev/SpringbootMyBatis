@@ -40,6 +40,12 @@ public class TodoImpl implements TodoService{
 	@Override
 	public ArrayList<Todo> getByType(String type) {
 	    return (ArrayList<Todo>) todoDAO.getByType(type);
+	}
+
+	@Override
+	public Todo find(int id) {
+		// TODO Auto-generated method stub
+		return todoDAO.find(id);
 	} 
 	
 

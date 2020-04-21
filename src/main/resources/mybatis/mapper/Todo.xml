@@ -8,6 +8,11 @@
 		<result property="title" column="title" />
 		<result property="todo_type" column="todo_type" />
 	</resultMap>
+	
+	<select id="find" resultMap="EmployeeResultMap">
+		select * from todo where
+		id= #{id}
+	</select>
 
 	<select id="getByType" resultMap="EmployeeResultMap">
 		select * from todo where
